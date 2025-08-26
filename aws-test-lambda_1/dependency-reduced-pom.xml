@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>aws-test</artifactId>
+  <name>aws-test</name>
+  <version>0.0.1-SNAPSHOT</version>
+  <description>Demo project for Spring Boot with AWS SDK</description>
+  <build>
+    <finalName>lambda_1_jar</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.4</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer>
+                  <mainClass>com.example.batch.BatchCopyApp</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>bom</artifactId>
+        <version>${aws.sdk2.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <properties>
+    <aws.lambda.version>3.16.1</aws.lambda.version>
+    <java.version>17</java.version>
+    <aws.sdk1.version>1.12.774</aws.sdk1.version>
+    <aws.lambda.core.version>1.3.0</aws.lambda.core.version>
+    <aws.sdk2.version>2.32.0</aws.sdk2.version>
+  </properties>
+</project>
